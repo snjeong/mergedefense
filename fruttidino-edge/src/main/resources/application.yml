@@ -1,0 +1,14 @@
+server:
+  port: 9090
+
+eureka:
+  client:
+    fetch-registry: false # 유레카 클라이언트 활성화
+    register-with-eureka: false # 유레카 클라이언트 활성화
+    service-url:
+      defaultZone: http://localhost:8761/eureka # 유레카 클라이언트로 등록
+
+spring:
+  application:
+    name: apigateway-service
+

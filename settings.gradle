@@ -1,0 +1,5 @@
+rootProject.name = 'fruttidino-service'
+include 'fruttidino-edge'
+include 'fruttidino-api'
+include 'fruttidino-common'
+
