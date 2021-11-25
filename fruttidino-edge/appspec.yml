@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source:  /
+    destination: /home/ubuntu/build/
+
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  BeforeInstall:
+    - location: kill_process.sh
+      runas: root
+  ApplicationStart:
+    - location: run_java.sh
+      runas: root
