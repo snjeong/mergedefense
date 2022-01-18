@@ -75,7 +75,7 @@ public interface DinoMetaRepository extends CrudRepository<DinoNftMeta, Long> {
             ") di", nativeQuery = true)
     List<DinoNftMeta> findAllByDinoNftMetas();
 
-    @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_origin, di.ipfs_cdn\n" +
+    @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_origin, di.ipfs_cdn,\n" +
             "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag) as limited_tag,\n" +
             " \t(select limited_name from game.dino_part dp where dp.head = di.head ) as limited_part_set,\n" +
             " \t(case di.grade\n" +
@@ -138,5 +138,5 @@ public interface DinoMetaRepository extends CrudRepository<DinoNftMeta, Long> {
             "\tselect * from game.dino_gen dg join game.dino_basic db on dg.dino_type = db.dino_type\n" +
             "\twhere dg.nft_id = :tokenId\n" +
             ") di", nativeQuery = true)
-    DinoNftMeta findDinoNftMetaByTokenId(@Param("tokenId") String tokenId);
+    DinoNftMeta findDinoNftMetaByTokenId(@Param("tokenId") Integer tokenId);
 }

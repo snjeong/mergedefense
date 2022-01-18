@@ -16,9 +16,9 @@ spring:
     activate:
       on-profile: "local"
   datasource:
-    url: jdbc:postgresql://free-tier8.aws-ap-southeast-1.cockroachlabs.cloud:26257/db-stage-fruttidino-869.defaultdb?currentSchema=game&sslmode=verify-full&sslrootcert=/Users/neo/proj/monoverse/aws/cockroach/serverless_bata_cert/root.crt
+    url: jdbc:postgresql://db-frutti-prod-7x9.aws-ap-southeast-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/Users/neo/Library/CockroachCloud/certs/db-frutti-prod-ca.crt
     username: db4user
-    password: "!cockroachsu4user"
+    password: fruttisu4user
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-test-query: SELECT 1

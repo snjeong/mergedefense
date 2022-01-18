@@ -41,7 +41,7 @@ public class FruttiApiController {
     }
 
     @GetMapping("/dino/{tokenId}")
-    public DinoNftMetaJson DinoNftMeta(@PathVariable("tokenId") String tokenId) {
+    public DinoNftMetaJson DinoNftMeta(@PathVariable("tokenId") Integer tokenId) {
         DinoNftMeta dinoNftMeta;
 
         dinoNftMeta = dinoMetaRepository.findDinoNftMetaByTokenId(tokenId);
