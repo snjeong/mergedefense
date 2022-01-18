@@ -22,15 +22,6 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-test-query: SELECT 1
-  data:
-    rest:
-      # API의 모든 요청의 기본 경로를 지정함
-      base-path: /api
-      # 클라이언트가 따로 페이지 크기를 요청하지 않았을 때 적용 할 기본 페이지 크기를 설정
-      default-page-size: 10
-      # 최대 페이지 수를 설정
-      max-page-size: 10
-
   jpa:
     open-in-view: false
     properties:
@@ -90,8 +81,8 @@ cloud:
       auto: false
     sqs:
       queue:
-        name: fdt-nft-event-testnet.fifo	# AWS에서 생성한 Queue 이름
-        url: https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-testnet.fifo # 생성한
+        name: fdt-nft-event-prod.fifo	# AWS에서 생성한 Queue 이름
+        url: https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-prod.fifo # 생성한
 decorator:
   datasource:
     p6spy:
@@ -118,9 +109,10 @@ server:
     contexts: crdb
     enabled: true
 logging:
+  #config: classpath:log4j2.yml
   level:
     com:
       amazonaws:
         util:
           EC2MetadataUtils: error
-    org.hibernate.SQL: info
+    org.hibernate.SQL: debug
