@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NftLogRepository extends JpaRepository<NftLog, Integer> {
+public interface NftLogRepository extends JpaRepository<NftLog, String> {
 }

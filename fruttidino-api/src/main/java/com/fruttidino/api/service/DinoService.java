@@ -1,8 +1,8 @@
 package com.fruttidino.api.service;
 
-import com.fruttidino.api.entity.DinoGen;
-import com.fruttidino.api.entity.Mint;
-import com.fruttidino.api.entity.Transfer;
+import com.fruttidino.api.entity.game.DinoGen;
+import com.fruttidino.api.entity.nft.Mint;
+import com.fruttidino.api.entity.nft.Transfer;
 import com.fruttidino.api.entity.game.UserDino;
 import com.fruttidino.api.entity.nft.NftLog;
 import com.fruttidino.api.repository.DinoGenRepository;
@@ -32,17 +32,18 @@ public class DinoService {
     }
 
     @Transactional
-    public void addNftInfo(UUID dinoId, Mint mint) {
+    public void addNftMintInfo(UUID dinoId, String msgId, Mint mint) {
         try {
             NftLog nftLog = new NftLog();
+            nftLog.setMsgId(msgId);
             nftLog.setLogIndex(mint.getLogIndex());
             nftLog.setBlockNumber(mint.getBlockNumber());
             nftLog.setTransactionHash(mint.getTransactionHash());
-            nftLog.setFrom("0x0000000000000000000000000000000000000000");
-            nftLog.setTo(mint.getTo());
+            nftLog.setFromAddr("0x0000000000000000000000000000000000000000");
+            nftLog.setToAddr(mint.getTo());
             nftLog.setTokenId(mint.getTokenId());
             nftLog.setDinoId(mint.getDinoId());
-            nftLog.setType(mint.getType());
+            nftLog.setMsgType(mint.getType());
             nftLogRepository.save(nftLog);
 
             log.info("[addNftInfo] : dinoId = {}", dinoId);
@@ -79,18 +80,19 @@ public class DinoService {
     }
 
     @Transactional
-    public void addUserTransfer(int paramTokenId, Transfer transfer) {
+    public void addNftOwnerTransfer(int paramTokenId, String msgId, Transfer transfer) {
         log.debug("[addUserTransfer] : {}", transfer.toString());
         try {
             NftLog nftLog = new NftLog();
+            nftLog.setMsgId(msgId);
             nftLog.setLogIndex(transfer.getLogIndex());
             nftLog.setBlockNumber(transfer.getBlockNumber());
             nftLog.setTransactionHash(transfer.getTransactionHash());
-            nftLog.setFrom(transfer.getFrom() == null ? "" : transfer.getFrom());
-            nftLog.setTo(transfer.getTo() == null ? "" : transfer.getTo());
+            nftLog.setFromAddr(transfer.getFrom() == null ? "" : transfer.getFrom());
+            nftLog.setToAddr(transfer.getTo() == null ? "" : transfer.getTo());
             nftLog.setTokenId(transfer.getTokenId());
             nftLog.setDinoId("");
-            nftLog.setType(transfer.getType());
+            nftLog.setMsgType(transfer.getType());
             nftLogRepository.save(nftLog);
 
             Optional<DinoGen> dinoGenOptional = Optional.ofNullable(dinoGenRepository.findDinoGenByNftId(paramTokenId));

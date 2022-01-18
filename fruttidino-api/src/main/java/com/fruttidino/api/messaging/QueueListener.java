@@ -3,8 +3,8 @@ package com.fruttidino.api.messaging;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fruttidino.api.component.AmazonSQSSender;
-import com.fruttidino.api.entity.Mint;
-import com.fruttidino.api.entity.Transfer;
+import com.fruttidino.api.entity.nft.Mint;
+import com.fruttidino.api.entity.nft.Transfer;
 import com.fruttidino.api.entity.nft.NftLog;
 import com.fruttidino.api.repository.NftLogRepository;
 import com.fruttidino.api.service.DinoService;
@@ -42,7 +42,7 @@ public class QueueListener {
 		this.nftLogRepository = nftLogRepository;
 	}
 
-	@PostMapping("/send")
+	@PostMapping("/send/sqs/mint")
 	public String send(@RequestBody Mint message) throws JsonProcessingException {
 		amazonSQSSender.sendMessage(message);
 		return "OK";
@@ -55,18 +55,25 @@ public class QueueListener {
 		log.info("hdeader : {}", headers);
 		NftLog nftLog = new NftLog();
 
-		if (headers.get("MessageGroupId") == null)
+		if (headers.get("MessageGroupId") == null) {
+			log.error("[receiveMessage][error] : not exist MessageGroupId, message id = {}", headers.get("MessageId"));
 			return;
+		}
 
+		if (headers.get("MessageDeduplicationId") == null) {
+			log.error("[receiveMessage][error] : not exist MessageDeduplicationId, message id = {}", headers.get("MessageId"));
+			return;
+		}
+
+		String messageDeduplicationId = headers.get("MessageDeduplicationId");
 		if (headers.get("MessageGroupId").equals("Mint")) {
-			Mint readValue = objectMapper.readValue(message, Mint.class);
-			// creating UUID
-			UUID uid = UUID.fromString(readValue.getDinoId());
-			dinoService.addNftInfo(uid, readValue);
+			Mint mint = objectMapper.readValue(message, Mint.class);
+			UUID uid = UUID.fromString(mint.getDinoId());
+			dinoService.addNftMintInfo(uid, messageDeduplicationId, mint);
 		}
 		else {
-			Transfer readValue = objectMapper.readValue(message, Transfer.class);
-			dinoService.addUserTransfer(readValue.getTokenId(), readValue);
+			Transfer transfer = objectMapper.readValue(message, Transfer.class);
+			dinoService.addNftOwnerTransfer(transfer.getTokenId(), messageDeduplicationId, transfer);
 		}
 	}
 }

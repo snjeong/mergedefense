@@ -1,8 +1,7 @@
 package com.fruttidino.api.repository;
 
-import com.fruttidino.api.entity.DinoGen;
+import com.fruttidino.api.entity.game.DinoGen;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

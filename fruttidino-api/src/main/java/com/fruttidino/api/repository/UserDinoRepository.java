@@ -1,6 +1,5 @@
 package com.fruttidino.api.repository;
 
-import com.fruttidino.api.entity.DinoGen;
 import com.fruttidino.api.entity.game.UserDino;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

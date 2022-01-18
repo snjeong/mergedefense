@@ -1,4 +1,4 @@
-package com.fruttidino.api.entity;
+package com.fruttidino.api.entity.nft;
 
 import lombok.Data;
 

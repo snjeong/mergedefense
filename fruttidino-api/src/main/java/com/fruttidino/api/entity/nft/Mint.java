@@ -1,6 +1,7 @@
-package com.fruttidino.api.entity;
+package com.fruttidino.api.entity.nft;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fruttidino.api.entity.nft.Ipfs;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

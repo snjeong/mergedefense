@@ -129,7 +129,7 @@ public class FruttiApiController {
     public String DinoNftTest(@PathVariable("tokenId") String tokenId){
 
         UUID genDinoId = UUID.fromString("3b9ed7eb-0e22-4864-b073-cba7f35dc3a1");
-        dinoService.addNftInfo(genDinoId, null);
+        dinoService.addNftMintInfo(genDinoId, UUID.randomUUID().toString(), null);
 
         log.info("add nft info = {}", genDinoId.toString());
 
@@ -144,7 +144,7 @@ public class FruttiApiController {
         userDino.setOwner("address");
         userDino.setGenId(genDinoId);
         userDino.setNftId(10000);
-        dinoService.addUserTransfer(1, null);
+        dinoService.addNftOwnerTransfer(1, UUID.randomUUID().toString(), null);
 
         log.info("add nft info = {}", genDinoId.toString());
 
