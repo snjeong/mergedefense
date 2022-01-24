@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,6 +34,14 @@ public class RestControllerExceptionAdvice extends AbstractExceptionHandler {
         printError(req, ex, ErrorCode.INTERNAL_SERVER_ERROR);
 
         return new ResponseEntity<>(ResponseMessage.create(ErrorCode.INTERNAL_SERVER_ERROR), ErrorCode.INTERNAL_SERVER_ERROR.getHttpStatus());
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<ResponseMessage> handleError404(HttpServletRequest req, Exception ex) {
+        printError(req, ex, ErrorCode.BAD_REQUEST);
+
+        return new ResponseEntity<>(ResponseMessage.create(ErrorCode.NOT_FOUND_API), ErrorCode.NOT_FOUND_API.getHttpStatus());
     }
 
     @ExceptionHandler(ApplicationException.class)

@@ -97,6 +97,11 @@ spring:
   config:
     activate:
       on-profile: "common"
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
 server:
   port: 10001
   output:
@@ -108,6 +113,9 @@ server:
     drop-first: false
     contexts: crdb
     enabled: true
+  error:          # This application has no explicit mapping for /error, so you are seeing this as a fallback.
+    whitelabel:
+      enabled: false
 logging:
   config: classpath:log4j2.xml
   level:
