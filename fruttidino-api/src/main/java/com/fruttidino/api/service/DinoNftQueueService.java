@@ -1,11 +1,10 @@
 package com.fruttidino.api.service;
 
 import com.fruttidino.api.entity.game.DinoGen;
-import com.fruttidino.api.entity.nft.Mint;
-import com.fruttidino.api.entity.nft.Transfer;
+import com.fruttidino.api.entity.nft.*;
 import com.fruttidino.api.entity.game.UserDino;
-import com.fruttidino.api.entity.nft.NftLog;
 import com.fruttidino.api.repository.DinoGenRepository;
+import com.fruttidino.api.repository.DinoMetaRepository;
 import com.fruttidino.api.repository.NftLogRepository;
 import com.fruttidino.api.repository.UserDinoRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,14 +17,16 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class DinoService {
+public class DinoNftQueueService {
 
+    private final DinoMetaRepository dinoMetaRepository;
     private final DinoGenRepository dinoGenRepository;
     private final UserDinoRepository userDinoRepository;
     private final NftLogRepository nftLogRepository;
 
     @Autowired
-    public DinoService(DinoGenRepository dinoGenRepository, UserDinoRepository userDinoRepository, NftLogRepository nftLogRepository) {
+    public DinoNftQueueService(DinoMetaRepository dinoMetaRepository, DinoGenRepository dinoGenRepository, UserDinoRepository userDinoRepository, NftLogRepository nftLogRepository) {
+        this.dinoMetaRepository = dinoMetaRepository;
         this.dinoGenRepository = dinoGenRepository;
         this.userDinoRepository = userDinoRepository;
         this.nftLogRepository = nftLogRepository;

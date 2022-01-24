@@ -1,15 +1,16 @@
 package com.fruttidino.api.repository;
 
-import com.fruttidino.api.entity.nft.DinoNftMeta;
+import com.fruttidino.api.entity.nft.NftMeta;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface DinoMetaRepository extends CrudRepository<DinoNftMeta, Long> {
+public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
 
     @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_uri,\n" +
             "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag) as limited_tag,\n" +
@@ -73,7 +74,7 @@ public interface DinoMetaRepository extends CrudRepository<DinoNftMeta, Long> {
             "from (\n" +
             "\tselect * from game.dino_gen dg join game.dino_basic db on dg.dino_type = db.dino_type\n" +
             ") di", nativeQuery = true)
-    List<DinoNftMeta> findAllByDinoNftMetas();
+    List<NftMeta> findAllByDinoNftMetas();
 
     @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_origin, di.ipfs_cdn,\n" +
             "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag) as limited_tag,\n" +
@@ -138,5 +139,6 @@ public interface DinoMetaRepository extends CrudRepository<DinoNftMeta, Long> {
             "\tselect * from game.dino_gen dg join game.dino_basic db on dg.dino_type = db.dino_type\n" +
             "\twhere dg.nft_id = :tokenId\n" +
             ") di", nativeQuery = true)
-    DinoNftMeta findDinoNftMetaByTokenId(@Param("tokenId") Integer tokenId);
+    NftMeta findDinoNftMetaByTokenId(@Param("tokenId") Integer tokenId);
+
 }

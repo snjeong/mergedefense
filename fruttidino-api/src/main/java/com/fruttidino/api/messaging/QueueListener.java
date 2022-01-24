@@ -7,7 +7,7 @@ import com.fruttidino.api.entity.nft.Mint;
 import com.fruttidino.api.entity.nft.Transfer;
 import com.fruttidino.api.entity.nft.NftLog;
 import com.fruttidino.api.repository.NftLogRepository;
-import com.fruttidino.api.service.DinoService;
+import com.fruttidino.api.service.DinoNftQueueService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ import java.util.UUID;
 @Component
 public class QueueListener {
 
-	private final DinoService dinoService;
+	private final DinoNftQueueService dinoNftQueueService;
 	private final ObjectMapper objectMapper;
 	private final AmazonSQSSender amazonSQSSender;
 	private final NftLogRepository nftLogRepository;
@@ -35,8 +35,8 @@ public class QueueListener {
 	private static final Logger LOGGER = LoggerFactory.getLogger(QueueListener.class);
 
 	@Autowired
-	public QueueListener(DinoService dinoService, ObjectMapper objectMapper, AmazonSQSSender amazonSQSSender, NftLogRepository nftLogRepository) {
-		this.dinoService = dinoService;
+	public QueueListener(DinoNftQueueService dinoNftQueueService, ObjectMapper objectMapper, AmazonSQSSender amazonSQSSender, NftLogRepository nftLogRepository) {
+		this.dinoNftQueueService = dinoNftQueueService;
 		this.objectMapper = objectMapper;
 		this.amazonSQSSender = amazonSQSSender;
 		this.nftLogRepository = nftLogRepository;
@@ -69,11 +69,11 @@ public class QueueListener {
 		if (headers.get("MessageGroupId").equals("Mint")) {
 			Mint mint = objectMapper.readValue(message, Mint.class);
 			UUID uid = UUID.fromString(mint.getDinoId());
-			dinoService.addNftMintInfo(uid, messageDeduplicationId, mint);
+			dinoNftQueueService.addNftMintInfo(uid, messageDeduplicationId, mint);
 		}
 		else {
 			Transfer transfer = objectMapper.readValue(message, Transfer.class);
-			dinoService.addNftOwnerTransfer(transfer.getTokenId(), messageDeduplicationId, transfer);
+			dinoNftQueueService.addNftOwnerTransfer(transfer.getTokenId(), messageDeduplicationId, transfer);
 		}
 	}
 }

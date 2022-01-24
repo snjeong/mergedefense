@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class DinoNftMeta {
+public class NftMeta {
     @Id
     @GeneratedValue
     @Column(name = "gen_id")
