@@ -25,8 +25,6 @@ public class DinoGen {
     private Integer saleRound;
     @Column(name = "gen_seq")
     private Integer genSeq;
-    @Column(name = "tag")
-    private Integer tag;
     @Column(name = "dino_type")
     private Integer dinoType;
     @Column(name = "grade")
