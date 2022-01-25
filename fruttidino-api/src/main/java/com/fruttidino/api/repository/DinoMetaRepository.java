@@ -12,8 +12,8 @@ import java.util.Optional;
 @Repository
 public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
 
-    @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_uri,\n" +
-            "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag) as limited_tag,\n" +
+    @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.body, di.head, di.eyes, di.mouth, di.limited_part_count,\n" +
+            "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag_idx) as limited_tag,\n" +
             " \t(select limited_name from game.dino_part dp where dp.head = di.head ) as limited_part_set,\n" +
             " \t(case di.grade\n" +
             "\t \twhen 1 then 'normal'\n" +
@@ -77,7 +77,7 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
     List<NftMeta> findAllByDinoNftMetas();
 
     @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_origin, di.ipfs_cdn,\n" +
-            "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag) as limited_tag,\n" +
+            "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag_idx) as limited_tag,\n" +
             " \t(select limited_name from game.dino_part dp where dp.head = di.head ) as limited_part_set,\n" +
             " \t(case di.grade\n" +
             "\t \twhen 1 then 'normal'\n" +
