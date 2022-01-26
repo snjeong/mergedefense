@@ -24,6 +24,8 @@ public class NftMeta {
     private String ipfsOrigin;
     @Column(name = "dino_type")
     private String dino_type;
+    @Column(name = "nft_dsc")
+    private String nft_dsc;
     @Column(name = "role")
     private String role;
     @Column(name = "grade")
