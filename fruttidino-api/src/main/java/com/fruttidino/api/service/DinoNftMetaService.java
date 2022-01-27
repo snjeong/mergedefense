@@ -51,7 +51,7 @@ public class DinoNftMetaService {
         BinanceNftMetaJson nftMetaJson = new BinanceNftMetaJson();
         nftMetaJson.setName(nftMeta.getDino_type() + " #" + nftMeta.getNft_id());
         nftMetaJson.setImage(nftMeta.getIpfsCdn());
-        nftMetaJson.setDescription("nft description info");
+        nftMetaJson.setDescription(nftMeta.getNft_dsc());
 
         return nftMetaJson;
     }
