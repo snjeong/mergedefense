@@ -86,7 +86,11 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
             " \tend) as grade,\n" +
             " \tdi.pure_part_count as pure_part_count,\n" +
             "\tdi.name_string as dino_name,\n" +
-            "\tdi.role,\n" +
+            "\t(case di.role\n" +
+            "\t\twhen 1 then 'Tank'\n" +
+            "\t\twhen 2 then 'Dealer'\n" +
+            "\t\twhen 3 then 'Supporter'\n" +
+            "\tend) as role,\n" +
             "\t(case di.talent\n" +
             "\t\twhen 1 then 'Carnivore'\n" +
             "\t\twhen 2 then 'Herbivore'\n" +

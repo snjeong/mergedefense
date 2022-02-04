@@ -88,7 +88,7 @@ public class DinoNftMetaService {
 
         NftMetaAttributes dinoAttrPureness = new NftMetaAttributes();
         dinoAttrPureness.setTrait_type("Pureness");
-        dinoAttrPureness.setValue(Integer.toString(nftMeta.getPurePartCount()));
+        dinoAttrPureness.setValue(nftMeta.getPurePartCount() == 0 ? "-" : Integer.toString(nftMeta.getPurePartCount()));
         nftMetaJson.getAttributes().add(dinoAttrPureness);
 
         NftMetaAttributes dinoAttrClass = new NftMetaAttributes();
