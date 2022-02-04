@@ -61,7 +61,7 @@ public class FruttiApiController {
         return nftMetaJsonData;
     }
 
-    @GetMapping("/nft-makret/{marketId}/dino/{tokenId}")
+    @GetMapping("/nft-market/{marketId}/dino/{tokenId}")
     public NftMetaJson DinoNftMeta(@PathVariable("marketId") Integer marketId, @PathVariable("tokenId") Integer tokenId) throws Exception {
         NftMetaJson nftMetaJsonData;
 
