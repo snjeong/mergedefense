@@ -50,7 +50,7 @@ public class DinoNftMetaService {
 
         BinanceNftMetaJson nftMetaJson = new BinanceNftMetaJson();
         nftMetaJson.setName(nftMeta.getDino_type() + " #" + nftMeta.getNft_id());
-        nftMetaJson.setImage(nftMeta.getIpfsOrigin());
+        nftMetaJson.setImage(nftMeta.getIpfsOrigin());  // ipfs uri 전송
         nftMetaJson.setDescription(nftMeta.getNft_dsc());
 
         return nftMetaJson;
@@ -67,6 +67,7 @@ public class DinoNftMetaService {
         nftMetaJson.setName(nftMeta.getDino_type() + " #" + nftMeta.getNft_id());
         nftMetaJson.setDescription(nftMeta.getNft_dsc());
         nftMetaJson.setImage(nftMeta.getIpfsCdn());
+        nftMetaJson.setImageIpfs(nftMeta.getIpfsOrigin());
 
         NftMetaAttributes dinoAttrLimitedTag = new NftMetaAttributes();
         dinoAttrLimitedTag.setTrait_type("Limited Tag");

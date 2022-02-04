@@ -51,10 +51,22 @@ public class FruttiApiController {
     }
 
     @GetMapping("/dino/{tokenId}")
-    public BinanceNftMetaJson DinoNftMeta(@PathVariable("tokenId") Integer tokenId) throws Exception {
-        BinanceNftMetaJson nftMetaJsonData;
+    public NftMetaJson DinoNftMeta(@PathVariable("tokenId") Integer tokenId) throws Exception {
+        NftMetaJson nftMetaJsonData;
 
-        nftMetaJsonData = dinoNftMetaService.getBinanceNftMetaInfo(tokenId);
+        nftMetaJsonData = dinoNftMetaService.getNftMetaInfo(tokenId);
+        if (nftMetaJsonData == null)
+            throwApplicationException(log, sb.toString(), ErrorCode.NOT_EXIST_CHARACTER);
+
+        return nftMetaJsonData;
+    }
+
+    @GetMapping("/nft-makret/{marketId}/dino/{tokenId}")
+    public NftMetaJson DinoNftMeta(@PathVariable("marketId") Integer marketId, @PathVariable("tokenId") Integer tokenId) throws Exception {
+        NftMetaJson nftMetaJsonData;
+
+        // TODO: 마켓코드별 데이터 처리
+        nftMetaJsonData = dinoNftMetaService.getNftMetaInfo(tokenId);
         if (nftMetaJsonData == null)
             throwApplicationException(log, sb.toString(), ErrorCode.NOT_EXIST_CHARACTER);
 
