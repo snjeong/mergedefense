@@ -22,8 +22,10 @@ public class NftMeta {
     private String ipfsCdn;
     @Column(name = "ipfs_origin")
     private String ipfsOrigin;
+    @Column(name = "dino_name")
+    private String dino_name;
     @Column(name = "dino_type")
-    private String dino_type;
+    private int dino_type;
     @Column(name = "nft_dsc")
     private String nft_dsc;
     @Column(name = "role")

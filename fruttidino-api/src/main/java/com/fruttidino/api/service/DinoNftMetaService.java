@@ -64,7 +64,7 @@ public class DinoNftMetaService {
         }
 
         NftMetaJson nftMetaJson = new NftMetaJson();
-        nftMetaJson.setName(nftMeta.getDino_type() + " #" + nftMeta.getNft_id());
+        nftMetaJson.setName(nftMeta.getDino_name() + " #" + nftMeta.getNft_id());
         nftMetaJson.setDescription(nftMeta.getNft_dsc());
         nftMetaJson.setImage(nftMeta.getIpfsCdn());
         nftMetaJson.setImageIpfs(nftMeta.getIpfsOrigin());
@@ -93,7 +93,7 @@ public class DinoNftMetaService {
 
         NftMetaAttributes dinoAttrClass = new NftMetaAttributes();
         dinoAttrClass.setTrait_type("Class");
-        dinoAttrClass.setValue(nftMeta.getDino_type());
+        dinoAttrClass.setValue(nftMeta.getDino_name());
         nftMetaJson.getAttributes().add(dinoAttrClass);
 
         NftMetaAttributes dinoAttrRole = new NftMetaAttributes();

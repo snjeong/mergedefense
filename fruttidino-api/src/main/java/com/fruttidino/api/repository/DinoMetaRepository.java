@@ -76,7 +76,7 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
             ") di", nativeQuery = true)
     List<NftMeta> findAllByDinoNftMetas();
 
-    @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_origin, di.ipfs_cdn, di.nft_dsc, \n" +
+    @Query(value = "select di.gen_id, di.nft_id, di.gen_seq, di.dino_type, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_origin, di.ipfs_cdn, di.nft_dsc, \n" +
             "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag_idx) as limited_tag,\n" +
             " \t(select limited_name from game.dino_part dp where dp.head = di.head ) as limited_part_set,\n" +
             " \t(case di.grade\n" +
@@ -85,7 +85,7 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
             "\t \twhen 3 then 'legend' \t\n" +
             " \tend) as grade,\n" +
             " \tdi.pure_part_count as pure_part_count,\n" +
-            "\tdi.name_string as dino_type,\n" +
+            "\tdi.name_string as dino_name,\n" +
             "\tdi.role,\n" +
             "\t(case di.talent\n" +
             "\t\twhen 1 then 'Carnivore'\n" +

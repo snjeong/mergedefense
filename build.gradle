@@ -91,6 +91,7 @@ project(':fruttidino-api') {
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
         implementation group: 'net.ttddyy', name: 'datasource-proxy', version: '1.4.1'
         implementation 'org.hibernate:hibernate-core:5.4.32.Final'
+
         //testImplementation 'org.springframework.amqp:spring-rabbit-test'
     }
 }
