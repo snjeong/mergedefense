@@ -54,6 +54,10 @@ public class NftMeta {
     private String tailTitle;
     @Column(name = "tail_name")
     private String tailName;
+    @Column(name = "back_title")
+    private String backTitle;
+    @Column(name = "back_name")
+    private String backName;
     @Column(name = "wing_title")
     private String wingTitle;
     @Column(name = "wing_name")

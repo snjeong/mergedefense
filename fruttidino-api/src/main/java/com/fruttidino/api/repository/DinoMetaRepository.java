@@ -127,6 +127,11 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
             "\t  from game.dino_part dp where dp.wing = di.wing\n" +
             "\t) as wing_title,\n" +
             "\t(select wing_name_string from game.dino_part dp where dp.wing = di.wing ) as wing_name,\n" +
+            "\t( select \n" +
+            "\t\tcase limited_name when 'none' then 'Back' else 'Back' || '(' || limited_name || ')' end\n" +
+            "\t  from game.dino_part dp where dp.back = di.back\n" +
+            "\t) as back_title,\n" +
+            "\t(select back_name_string from game.dino_part dp where dp.back = di.back ) as back_name,\n" +
             "\tdi.wing_slot\n" +
             "from (\n" +
             "\tselect * from game.dino_gen dg join game.dino_basic db on dg.dino_type = db.dino_type\n" +
