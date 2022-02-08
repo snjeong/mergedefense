@@ -80,9 +80,9 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
             "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag_idx) as limited_tag,\n" +
             " \t(select limited_name from game.dino_part dp where dp.head = di.head ) as limited_part_set,\n" +
             " \t(case di.grade\n" +
-            "\t \twhen 1 then 'normal'\n" +
-            "\t \twhen 2 then 'rare'\n" +
-            "\t \twhen 3 then 'legend' \t\n" +
+            "\t \twhen 1 then 'Normal'\n" +
+            "\t \twhen 2 then 'Rare'\n" +
+            "\t \twhen 3 then 'Legend' \t\n" +
             " \tend) as grade,\n" +
             " \tdi.pure_part_count as pure_part_count,\n" +
             "\tdi.name_string as dino_name,\n" +
@@ -97,10 +97,10 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
             "\t\twhen 3 then 'Omnivore'\n" +
             "\tend) as talent,\n" +
             "\t(case di.attribute\n" +
-            "\t\twhen 1 then 'day'\n" +
-            "\t\twhen 2 then 'nightn'\n" +
-            "\t\twhen 3 then 'dawn'\n" +
-            "\t\twhen 4 then 'eclipse'\n" +
+            "\t\twhen 1 then 'Day'\n" +
+            "\t\twhen 2 then 'Night'\n" +
+            "\t\twhen 3 then 'Dawn'\n" +
+            "\t\twhen 4 then 'Eclipse'\n" +
             "\tend) as attribute ,\n" +
             "\t( select \n" +
             "\t\tcase limited_name when 'none' then 'Head' else 'Head' || '(' || limited_name || ')' end\n" +

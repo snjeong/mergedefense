@@ -7,6 +7,7 @@ import com.fruttidino.api.entity.nft.NftMeta;
 import com.fruttidino.api.entity.nft.binance.BinanceNftMetaJson;
 import com.fruttidino.api.entity.nft.opensea.NftMetaAttributes;
 import com.fruttidino.api.entity.nft.opensea.NftMetaJson;
+import com.fruttidino.api.entity.type.DinoType;
 import com.fruttidino.api.repository.DinoGenRepository;
 import com.fruttidino.api.repository.DinoMetaRepository;
 import com.fruttidino.api.repository.NftLogRepository;
@@ -90,6 +91,9 @@ public class DinoNftMetaService {
         dinoAttrPureness.setTrait_type("Pureness");
         dinoAttrPureness.setValue(nftMeta.getPurePartCount() == 0 ? "-" : Integer.toString(nftMeta.getPurePartCount()));
         nftMetaJson.getAttributes().add(dinoAttrPureness);
+
+        Optional<DinoType> dinoType = DinoType.getDinoTypeByValue(nftMeta.getDino_type());
+        dinoType.get().getDinoName();
 
         NftMetaAttributes dinoAttrClass = new NftMetaAttributes();
         dinoAttrClass.setTrait_type("Class");
