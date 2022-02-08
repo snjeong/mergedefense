@@ -77,8 +77,14 @@ public class DinoNftMetaService {
 
         NftMetaAttributes dinoAttrPartSet = new NftMetaAttributes();
         dinoAttrPartSet.setTrait_type("Limited Parts Set");
-        String limitedPartSet = nftMeta.getLimitedPartSet().equals("none") ? "-" :
-                String.format("%s(%d)", nftMeta.getLimitedPartSet(), nftMeta.getLimitedPartCount());
+        String limitedPartSet = "";
+        if(nftMeta.getLimitedPartCount() > 0) {
+            limitedPartSet = String.format("%s(%d)", "Atuon", nftMeta.getLimitedPartCount());
+        }
+        else {
+            limitedPartSet = nftMeta.getLimitedPartSet().equals("none") ? "-" :
+                    String.format("%s(%d)", nftMeta.getLimitedPartSet(), nftMeta.getLimitedPartCount());
+        }
         dinoAttrPartSet.setValue(limitedPartSet);
         nftMetaJson.getAttributes().add(dinoAttrPartSet);
 
