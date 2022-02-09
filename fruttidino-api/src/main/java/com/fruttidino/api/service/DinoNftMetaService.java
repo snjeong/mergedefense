@@ -136,15 +136,15 @@ public class DinoNftMetaService {
         dinoAttrMouth.setValue(nftMeta.getMouthName());
         nftMetaJson.getAttributes().add(dinoAttrMouth);
 
-        NftMetaAttributes dinoAttrTail = new NftMetaAttributes();
-        dinoAttrTail.setTrait_type(nftMeta.getTailTitle());
-        dinoAttrTail.setValue(nftMeta.getTailName());
-        nftMetaJson.getAttributes().add(dinoAttrTail);
-
         NftMetaAttributes dinoAttrBack = new NftMetaAttributes();
         dinoAttrBack.setTrait_type(nftMeta.getBackTitle());
         dinoAttrBack.setValue(nftMeta.getBackName());
         nftMetaJson.getAttributes().add(dinoAttrBack);
+
+        NftMetaAttributes dinoAttrTail = new NftMetaAttributes();
+        dinoAttrTail.setTrait_type(nftMeta.getTailTitle());
+        dinoAttrTail.setValue(nftMeta.getTailName());
+        nftMetaJson.getAttributes().add(dinoAttrTail);
 
         NftMetaAttributes dinoAttrWing = new NftMetaAttributes();
         dinoAttrWing.setTrait_type(nftMeta.getWingTitle() == null ? "Wing" : nftMeta.getWingTitle());
