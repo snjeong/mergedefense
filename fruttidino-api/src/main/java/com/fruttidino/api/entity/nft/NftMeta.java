@@ -1,6 +1,5 @@
 package com.fruttidino.api.entity.nft;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -25,15 +24,15 @@ public class NftMeta {
     @Column(name = "dino_name")
     private String dino_name;
     @Column(name = "dino_type")
-    private int dino_type;
+    private int dinoType;
     @Column(name = "nft_dsc")
     private String nft_dsc;
     @Column(name = "role")
-    private String role;
+    private int role;
     @Column(name = "grade")
-    private String grade;
+    private int grade;
     @Column(name = "talent")
-    private String talent;
+    private int talent;
     @Column(name = "attribute")
     private String attribute;
     @Column(name = "wing_slot")

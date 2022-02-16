@@ -18,7 +18,8 @@ public enum DinoType {
     Piecus("Piecus", 7, "Piecus dsc"),
     Banacus("Banacus", 8, "Banacus dsc"),
     Ramcus("Ramcus", 9, "Ramcus dsc"),
-    Tigon("Tigon", 10, "Tigon dsc");
+    PitaDrago("PitaDrago", 10, "PitaDrago dsc"),
+    None("None", 99, "None name");
 
     private final String dinoName;
     private final int dinoType;

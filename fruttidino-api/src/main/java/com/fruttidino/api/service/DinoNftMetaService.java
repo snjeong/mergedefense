@@ -1,13 +1,11 @@
 package com.fruttidino.api.service;
 
-import com.fruttidino.api.common.exception.ApplicationException;
-import com.fruttidino.api.common.exception.ErrorCode;
 import com.fruttidino.api.common.util.PlatformLogBuilder;
 import com.fruttidino.api.entity.nft.NftMeta;
 import com.fruttidino.api.entity.nft.binance.BinanceNftMetaJson;
 import com.fruttidino.api.entity.nft.opensea.NftMetaAttributes;
 import com.fruttidino.api.entity.nft.opensea.NftMetaJson;
-import com.fruttidino.api.entity.type.DinoType;
+import com.fruttidino.api.entity.type.*;
 import com.fruttidino.api.repository.DinoGenRepository;
 import com.fruttidino.api.repository.DinoMetaRepository;
 import com.fruttidino.api.repository.NftLogRepository;
@@ -17,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-import static com.fruttidino.api.common.util.Utils.throwApplicationException;
 
 @Slf4j
 @Service
@@ -50,7 +46,7 @@ public class DinoNftMetaService {
         }
 
         BinanceNftMetaJson nftMetaJson = new BinanceNftMetaJson();
-        nftMetaJson.setName(nftMeta.getDino_type() + " #" + nftMeta.getNft_id());
+        nftMetaJson.setName(nftMeta.getDinoType() + " #" + nftMeta.getNft_id());
         nftMetaJson.setImage(nftMeta.getIpfsOrigin());  // ipfs uri 전송
         nftMetaJson.setDescription(nftMeta.getNft_dsc());
 
@@ -89,8 +85,9 @@ public class DinoNftMetaService {
         nftMetaJson.getAttributes().add(dinoAttrPartSet);
 
         NftMetaAttributes dinoAttrGrade = new NftMetaAttributes();
+        Optional<DinoGrade> dinoGrade = Optional.of(DinoGrade.getDinoTypeByValue(nftMeta.getGrade()).orElse(DinoGrade.None));
         dinoAttrGrade.setTrait_type("Grade");
-        dinoAttrGrade.setValue(nftMeta.getGrade());
+        dinoAttrGrade.setValue(dinoGrade.get().getDinoGradeName());
         nftMetaJson.getAttributes().add(dinoAttrGrade);
 
         NftMetaAttributes dinoAttrPureness = new NftMetaAttributes();
@@ -98,57 +95,64 @@ public class DinoNftMetaService {
         dinoAttrPureness.setValue(nftMeta.getPurePartCount() == 0 ? "-" : Integer.toString(nftMeta.getPurePartCount()));
         nftMetaJson.getAttributes().add(dinoAttrPureness);
 
-        Optional<DinoType> dinoType = DinoType.getDinoTypeByValue(nftMeta.getDino_type());
-        dinoType.get().getDinoName();
-
+        Optional<DinoType> dinoType = Optional.of(DinoType.getDinoTypeByValue(nftMeta.getDinoType()).orElse(DinoType.None));
         NftMetaAttributes dinoAttrClass = new NftMetaAttributes();
         dinoAttrClass.setTrait_type("Class");
-        dinoAttrClass.setValue(nftMeta.getDino_name());
+        dinoAttrClass.setValue(dinoType.get().getDinoName());
         nftMetaJson.getAttributes().add(dinoAttrClass);
 
+        Optional<DinoRole> dinoRole = Optional.of(DinoRole.getDinoTypeByValue(nftMeta.getRole()).orElse(DinoRole.None));
         NftMetaAttributes dinoAttrRole = new NftMetaAttributes();
         dinoAttrRole.setTrait_type("Role");
-        dinoAttrRole.setValue(nftMeta.getRole());
+        dinoAttrRole.setValue(dinoRole.get().getDinoRoleName());
         nftMetaJson.getAttributes().add(dinoAttrRole);
 
+        Optional<DinoTalent> dinoTalent = Optional.of(DinoTalent.getDinoTypeByValue(nftMeta.getTalent()).orElse(DinoTalent.None));
         NftMetaAttributes dinoAttrTalent = new NftMetaAttributes();
         dinoAttrTalent.setTrait_type("Talent");
-        dinoAttrTalent.setValue(nftMeta.getTalent());
+        dinoAttrTalent.setValue(dinoTalent.get().getDinoTalentName());
         nftMetaJson.getAttributes().add(dinoAttrTalent);
 
+        Optional<DinoAttribute> dinoAttribute = Optional.of(DinoAttribute.getDinoTypeByValue(nftMeta.getAttribute()).orElse(DinoAttribute.None));
         NftMetaAttributes dinoAttrAttribute = new NftMetaAttributes();
         dinoAttrAttribute.setTrait_type("Attribute");
-        dinoAttrAttribute.setValue(nftMeta.getAttribute());
+        dinoAttrAttribute.setValue(dinoAttribute.get().getDinoAttributeName());
         nftMetaJson.getAttributes().add(dinoAttrAttribute);
 
         NftMetaAttributes dinoAttrHead = new NftMetaAttributes();
-        dinoAttrHead.setTrait_type(nftMeta.getHeadTitle());
+        String strHeadTitle = nftMeta.getHeadTitle().equals("none") ? "Head" : String.format("Head(%s)", nftMeta.getHeadTitle());
+        dinoAttrHead.setTrait_type(strHeadTitle);
         dinoAttrHead.setValue(nftMeta.getHeadName());
         nftMetaJson.getAttributes().add(dinoAttrHead);
 
         NftMetaAttributes dinoAttrEyes = new NftMetaAttributes();
-        dinoAttrEyes.setTrait_type(nftMeta.getEyesTitle());
+        String strEyeTitle = nftMeta.getEyesTitle().equals("none") ? "Eyes" : String.format("Eyes(%s)", nftMeta.getEyesTitle());
+        dinoAttrEyes.setTrait_type(strEyeTitle);
         dinoAttrEyes.setValue(nftMeta.getEyesName());
         nftMetaJson.getAttributes().add(dinoAttrEyes);
 
         NftMetaAttributes dinoAttrMouth = new NftMetaAttributes();
-        dinoAttrMouth.setTrait_type(nftMeta.getMouthTitle());
+        String strMouthTitle = nftMeta.getMouthTitle().equals("none") ? "Mouth" : String.format("Mouth(%s)", nftMeta.getMouthTitle());
+        dinoAttrMouth.setTrait_type(strMouthTitle);
         dinoAttrMouth.setValue(nftMeta.getMouthName());
         nftMetaJson.getAttributes().add(dinoAttrMouth);
 
         NftMetaAttributes dinoAttrTail = new NftMetaAttributes();
-        dinoAttrTail.setTrait_type(nftMeta.getTailTitle());
+        String strTailTitle = nftMeta.getTailTitle().equals("none") ? "Tail" : String.format("Tail(%s)", nftMeta.getTailTitle());
+        dinoAttrTail.setTrait_type(strTailTitle);
         dinoAttrTail.setValue(nftMeta.getTailName());
         nftMetaJson.getAttributes().add(dinoAttrTail);
 
         NftMetaAttributes dinoAttrBack = new NftMetaAttributes();
-        dinoAttrBack.setTrait_type(nftMeta.getBackTitle());
+        String strBackTitle = nftMeta.getBackTitle().equals("none") ? "Back" : String.format("Back(%s)", nftMeta.getBackTitle());
+        dinoAttrBack.setTrait_type(strBackTitle);
         dinoAttrBack.setValue(nftMeta.getBackName());
         nftMetaJson.getAttributes().add(dinoAttrBack);
 
         NftMetaAttributes dinoAttrWing = new NftMetaAttributes();
-        dinoAttrWing.setTrait_type(nftMeta.getWingTitle() == null ? "Wing" : nftMeta.getWingTitle());
-        dinoAttrWing.setValue(nftMeta.getWingName() == null ? "-" : nftMeta.getWingName());
+        String strWingTitle = nftMeta.getWingTitle() == null || nftMeta.getWingTitle().equals("none") ? "Wing" : String.format("Wing(%s)", nftMeta.getWingTitle());
+        dinoAttrWing.setTrait_type(strWingTitle);
+        dinoAttrWing.setValue(nftMeta.getWingName() == null || nftMeta.getWingName().equals("none") ? "-" : nftMeta.getWingName());
         nftMetaJson.getAttributes().add(dinoAttrWing);
 
         NftMetaAttributes dinoAttrWingSlot = new NftMetaAttributes();
