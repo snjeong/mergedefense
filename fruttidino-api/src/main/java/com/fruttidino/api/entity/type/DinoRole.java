@@ -18,13 +18,13 @@ public enum DinoRole {
     private final int dinoRole;
 
     // Reverse lookup methods
-    public static Optional<DinoRole> getDinoTypeByValue(String value) {
+    public static Optional<DinoRole> getDinoRoleByValue(String value) {
         return Arrays.stream(DinoRole.values())
                 .filter(dinoRoleCode -> dinoRoleCode.dinoRoleName.equals(value))
                 .findFirst();
     }
 
-    public static Optional<DinoRole> getDinoTypeByValue(int value) {
+    public static Optional<DinoRole> getDinoRoleByValue(int value) {
         return Arrays.stream(DinoRole.values())
                 .filter(dinoRoleCode -> dinoRoleCode.dinoRole ==  value)
                 .findFirst();

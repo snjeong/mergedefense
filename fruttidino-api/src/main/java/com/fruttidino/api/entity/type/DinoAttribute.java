@@ -13,7 +13,7 @@ public enum DinoAttribute {
     Night("Night", 2),
     Dawn("Dawn", 3),
     Eclipse("Eclipse", 4),
-    None("Eclipse", 99);
+    None("None", 99);
 
 
     private final String dinoAttributeName;

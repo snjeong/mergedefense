@@ -34,7 +34,7 @@ public class NftMeta {
     @Column(name = "talent")
     private int talent;
     @Column(name = "attribute")
-    private String attribute;
+    private int attribute;
     @Column(name = "wing_slot")
     private int wingSlot;
     @Column(name = "head_title")

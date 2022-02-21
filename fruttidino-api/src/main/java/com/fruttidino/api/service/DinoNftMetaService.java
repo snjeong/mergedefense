@@ -85,7 +85,7 @@ public class DinoNftMetaService {
         nftMetaJson.getAttributes().add(dinoAttrPartSet);
 
         NftMetaAttributes dinoAttrGrade = new NftMetaAttributes();
-        Optional<DinoGrade> dinoGrade = Optional.of(DinoGrade.getDinoTypeByValue(nftMeta.getGrade()).orElse(DinoGrade.None));
+        Optional<DinoGrade> dinoGrade = Optional.of(DinoGrade.getDinoGradeByValue(nftMeta.getGrade()).orElse(DinoGrade.None));
         dinoAttrGrade.setTrait_type("Grade");
         dinoAttrGrade.setValue(dinoGrade.get().getDinoGradeName());
         nftMetaJson.getAttributes().add(dinoAttrGrade);
@@ -101,13 +101,13 @@ public class DinoNftMetaService {
         dinoAttrClass.setValue(dinoType.get().getDinoName());
         nftMetaJson.getAttributes().add(dinoAttrClass);
 
-        Optional<DinoRole> dinoRole = Optional.of(DinoRole.getDinoTypeByValue(nftMeta.getRole()).orElse(DinoRole.None));
+        Optional<DinoRole> dinoRole = Optional.of(DinoRole.getDinoRoleByValue(nftMeta.getRole()).orElse(DinoRole.None));
         NftMetaAttributes dinoAttrRole = new NftMetaAttributes();
         dinoAttrRole.setTrait_type("Role");
         dinoAttrRole.setValue(dinoRole.get().getDinoRoleName());
         nftMetaJson.getAttributes().add(dinoAttrRole);
 
-        Optional<DinoTalent> dinoTalent = Optional.of(DinoTalent.getDinoTypeByValue(nftMeta.getTalent()).orElse(DinoTalent.None));
+        Optional<DinoTalent> dinoTalent = Optional.of(DinoTalent.getDinoTalentByValue(nftMeta.getTalent()).orElse(DinoTalent.None));
         NftMetaAttributes dinoAttrTalent = new NftMetaAttributes();
         dinoAttrTalent.setTrait_type("Talent");
         dinoAttrTalent.setValue(dinoTalent.get().getDinoTalentName());
