@@ -84,7 +84,7 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
             "\t(select limited_name from game.dino_part dp where dp.eyes = di.eyes) as eyes_title,\n" +
             "\t(select eyes_name_string from game.dino_part dp where dp.eyes = di.eyes ) as eyes_name,\n" +
             "\t(select limited_name from game.dino_part dp where dp.mouth = di.mouth) as mouth_title,\n" +
-            "\t(select mouth_name_string from game.dino_part dp where dp.eyes = di.eyes ) as mouth_name,\n" +
+            "\t(select mouth_name_string from game.dino_part dp where dp.mouth = di.mouth ) as mouth_name,\n" +
             "\t(select limited_name from game.dino_part dp where dp.tail = di.tail) as tail_title,\n" +
             "\t(select tail_name_string from game.dino_part dp where dp.tail = di.tail ) as tail_name,\n" +
             "\t(select limited_name from game.dino_part dp where dp.wing = di.wing) as wing_title,\n" +
