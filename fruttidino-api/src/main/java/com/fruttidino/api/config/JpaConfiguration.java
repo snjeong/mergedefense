@@ -41,6 +41,7 @@ public class JpaConfiguration {
     }
 
     @Bean
+    @Primary
     @ConfigurationProperties("spring.datasource.hikari")
     public HikariDataSource hikariDataSource() {
         return dataSourceProperties()

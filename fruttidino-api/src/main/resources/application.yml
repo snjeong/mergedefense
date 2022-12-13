@@ -21,7 +21,12 @@ spring:
     password: fruttisu4user
     driver-class-name: org.postgresql.Driver
     hikari:
-      connection-test-query: SELECT 1
+      connectionTimeout : 30000
+      maximumPoolSize : 10
+      maxLifetime : 1800000
+      poolName : HikariCP
+      readOnly : false
+      connectionTestQuery : SELECT 1
   jpa:
     open-in-view: false
     properties:
@@ -30,7 +35,10 @@ spring:
         check_nullability : true
         format_sql : true
     show-sql: true
-
+  redis:
+    host: frutti-prod-redis.or9ryi.clustercfg.apse1.cache.amazonaws.com
+    port: 6379
+    ttl: 1 #cache ttl
 cloud:
   aws:
     credentials:
@@ -61,6 +69,11 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-test-query: SELECT 1
+      connection-timeout: 3000
+      validation-timeout: 3000
+      minimum-idle: 5
+      max-lifetime: 240000
+      maximum-pool-size: 20
   jpa:
     open-in-view: false
     properties:
@@ -69,6 +82,10 @@ spring:
         check_nullability : true
         format_sql : true
     show-sql: true
+  redis:
+    host: frutti-prod-redis.or9ryi.clustercfg.apse1.cache.amazonaws.com
+    port: 6379
+    ttl: 10080 #cache ttl, 10080 minutes(7days)
 cloud:
   aws:
     credentials:
@@ -91,6 +108,21 @@ decorator:
 ####################################
 # Common Settings
 ####################################
+springdoc:
+  version: 'v1.0'
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+    path: /frutti-dino-api.html
+    display-request-duration: true
+    groups-order: DESC
+    operationsSorter: method
+    disable-swagger-default-url: true
+  show-actuator: true
+  group-configs:
+  - group: frutti-apis
+    paths-to-match: /**
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -102,6 +134,10 @@ spring:
   web:
     resources:
       add-mappings: false
+  cache:
+    type: redis
+    redis:
+      cache-null-values: true
 server:
   port: 10001
   output:

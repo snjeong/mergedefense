@@ -12,6 +12,7 @@ import com.fruttidino.api.repository.NftLogRepository;
 import com.fruttidino.api.repository.UserDinoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -53,6 +54,7 @@ public class DinoNftMetaService {
         return nftMetaJson;
     }
 
+    @Cacheable(value = "NftMetaInfo", key = "#tokenId", cacheManager = "nftMetaCacheManager")
     public NftMetaJson getNftMetaInfo(Integer tokenId) {
         nftMeta = dinoMetaRepository.findDinoNftMetaByTokenId(tokenId);
         if (nftMeta == null) {
