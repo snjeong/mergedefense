@@ -38,7 +38,7 @@ spring:
   redis:
     host: frutti-prod-redis.or9ryi.clustercfg.apse1.cache.amazonaws.com
     port: 6379
-    ttl: 1 #cache ttl
+    ttl: 10 #cache ttl
 cloud:
   aws:
     credentials:
@@ -63,7 +63,7 @@ spring:
     activate:
       on-profile: "prod"
   datasource:
-    url: jdbc:postgresql://db-frutti-prod-7x9.aws-ap-southeast-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/home/ubuntu/frutti-api/deploy/db-frutti-prod-ca.crt
+    url: jdbc:postgresql://db-frutti-prod-7x9.aws-ap-southeast-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/Users/neo/Library/CockroachCloud/certs/db-frutti-prod-ca.crt
     username: db4user
     password: fruttisu4user
     driver-class-name: org.postgresql.Driver

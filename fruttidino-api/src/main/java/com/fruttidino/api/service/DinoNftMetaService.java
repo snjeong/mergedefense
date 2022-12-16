@@ -54,7 +54,7 @@ public class DinoNftMetaService {
         return nftMetaJson;
     }
 
-    //@Cacheable(value = "NftMetaInfo", key = "#tokenId", cacheManager = "nftMetaCacheManager")
+    @Cacheable(value = "NftMetaInfo", key = "#tokenId", cacheManager = "nftMetaCacheManager")
     public NftMetaJson getNftMetaInfo(Integer tokenId) {
         nftMeta = dinoMetaRepository.findDinoNftMetaByTokenId(tokenId);
         if (nftMeta == null) {
