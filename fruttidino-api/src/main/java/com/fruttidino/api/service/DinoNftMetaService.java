@@ -65,8 +65,8 @@ public class DinoNftMetaService {
         NftMetaJson nftMetaJson = new NftMetaJson();
         nftMetaJson.setName(nftMeta.getDino_name() + " #" + nftMeta.getNft_id());
         nftMetaJson.setDescription(nftMeta.getNft_dsc());
-        nftMetaJson.setImage(nftMeta.getIpfsCdn());
-        nftMetaJson.setImageIpfs(nftMeta.getIpfsOrigin());
+        nftMetaJson.setImage(String.format("%s%s.png", NftMetaJson.NFT_ORIGIN_IMAGE_URI, nftMeta.getNft_id()));
+        nftMetaJson.setImageIpfs(String.format("%s%s.png", NftMetaJson.NFT_ORIGIN_IMAGE_URI, nftMeta.getNft_id()));
 
         NftMetaAttributes dinoAttrLimitedTag = new NftMetaAttributes();
         dinoAttrLimitedTag.setTrait_type("Limited Tag");

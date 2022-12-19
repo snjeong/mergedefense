@@ -12,6 +12,8 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NftMetaJson {
 
+    public static final String NFT_ORIGIN_IMAGE_URI = "https://image.fruttidino.com/";
+
     private String name;
     private String description;
     private String image;
