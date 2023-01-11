@@ -9,9 +9,10 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum DinoGrade {
-    Normal("Normal", 1),
-    Rare("Rare", 2),
-    Legend("Legend", 3),
+    Rookie("Rookie", 100),
+    Normal("Normal", 200),
+    Rare("Rare", 300),
+    Legend("Legend", 400),
     None("None", 99);
 
     private final String dinoGradeName;

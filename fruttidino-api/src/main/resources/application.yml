@@ -16,7 +16,7 @@ spring:
     activate:
       on-profile: "local"
   datasource:
-    url: jdbc:postgresql://db-frutti-prod-7x9.aws-ap-southeast-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/Users/neo/Library/CockroachCloud/certs/db-frutti-prod-ca.crt
+    url: jdbc:postgresql://db-frutti-dev-3011.6xw.cockroachlabs.cloud:26257/db-frutti-dev-3011.defaultdb?sslmode=verify-full&sslrootcert=/Users/neo/.postgresql/fruttidino-dev.crt
     username: db4user
     password: fruttisu4user
     driver-class-name: org.postgresql.Driver
