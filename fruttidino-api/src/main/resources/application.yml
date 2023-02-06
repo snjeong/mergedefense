@@ -36,7 +36,7 @@ spring:
         dialect: org.hibernate.dialect.CockroachDB201Dialect
         check_nullability : true
         format_sql : true
-    show-sql: true
+    #show-sql: true #query debugging
   redis:
     host: localhost
     port: 6379
@@ -54,8 +54,8 @@ cloud:
       auto: false
     sqs:
       queue:
-        name: fdt-nft-event-testnet.fifo	# AWS에서 생성한 Queue 이름
-        url: https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-testnet.fifo # 생성한
+        name: fdt-nft-event-testnet-dev.fifo	# AWS에서 생성한 Queue 이름
+        url: https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-testnet-dev.fifo # 생성한
 ---
 ####################################
 # Dev Settings
@@ -101,8 +101,8 @@ cloud:
       auto: false
     sqs:
       queue:
-        name: fdt-nft-event-testnet.fifo	# AWS에서 생성한 Queue 이름
-        url: https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-testnet.fifo # 생성한
+        name: fdt-nft-event-testnet-dev.fifo	# AWS에서 생성한 Queue 이름
+        url: https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-testnet-dev.fifo # 생성한
 ---
 ####################################
 # Stage Settings
@@ -177,7 +177,7 @@ spring:
         dialect: org.hibernate.dialect.CockroachDB201Dialect
         check_nullability : true
         format_sql : true
-    show-sql: true
+    #show-sql: true
   redis:
     host: frutti-prod-redis.or9ryi.clustercfg.apse1.cache.amazonaws.com
     port: 6379
