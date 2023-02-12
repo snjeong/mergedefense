@@ -63,11 +63,14 @@ public class DinoNftQueueService {
             dinoGenRepository.save(dinoGen);
 
             // merge user_dino
+            Optional<UserDino> userDinoOptional = userDinoRepository.findById(dinoId);
             UserDino userDino = new UserDino();
             userDino.setGenId(dinoGen.getGenId());
             userDino.setNftId(dinoGen.getNftId());
             userDino.setOwner(mint.getTo());
-
+            if (userDinoOptional.isPresent()) {
+                userDino.setUid(userDinoOptional.get().getUid());
+            }
             userDinoRepository.save(userDino);
         } catch (Exception ex) {
             log.error("[addNftInfo][execption] : {}", ex.getMessage());
@@ -103,11 +106,15 @@ public class DinoNftQueueService {
             }
 
             DinoGen dinoGen = dinoGenOptional.get();
+            Optional<UserDino> userDinoOptional = userDinoRepository.findById(dinoGen.getGenId());
             UserDino userDino = new UserDino();
             userDino.setGenId(dinoGen.getGenId());
             userDino.setNftId(dinoGen.getNftId());
             userDino.setOwner(transfer.getTo());
 
+            if (userDinoOptional.isPresent()) {
+                userDino.setUid(userDinoOptional.get().getUid());
+            }
             userDinoRepository.save(userDino);
             log.info("[addUserTransfer][success] : dinoId = {}", nftLog);
         }
