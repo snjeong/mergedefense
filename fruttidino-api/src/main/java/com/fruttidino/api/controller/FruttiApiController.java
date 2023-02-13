@@ -3,6 +3,8 @@ package com.fruttidino.api.controller;
 import com.fruttidino.api.common.exception.ApplicationException;
 import com.fruttidino.api.common.exception.ErrorCode;
 import com.fruttidino.api.entity.game.UserDino;
+import com.fruttidino.api.entity.nft.Ipfs;
+import com.fruttidino.api.entity.nft.Mint;
 import com.fruttidino.api.entity.nft.binance.BinanceNftMetaJson;
 import com.fruttidino.api.repository.DinoMetaRepository;
 import com.fruttidino.api.entity.nft.NftMeta;
@@ -76,8 +78,20 @@ public class FruttiApiController {
     @GetMapping("/dino/nft/{tokenId}")
     public String DinoNftTest(@PathVariable("tokenId") String tokenId){
 
-        UUID genDinoId = UUID.fromString("3b9ed7eb-0e22-4864-b073-cba7f35dc3a1");
-        dinoService.addNftMintInfo(genDinoId, UUID.randomUUID().toString(), null);
+        UUID genDinoId = UUID.fromString("024b1320-4e5f-4d6f-94ca-fedc924d1791");
+        Mint mint = new Mint();
+        mint.setBlockNumber(0);
+        Ipfs ipfs = new Ipfs();
+        ipfs.setCdn("http://cdn");
+        ipfs.setOrigin("http://origin");
+        mint.setTokenId(1112);
+        mint.setDinoId(genDinoId.toString());
+        mint.setTransactionHash("0x77e0b0aad2aca1ce36e75cd2d84b53554bfb23179de5e155e5d764de2d4b6ed0");
+        mint.setTo("0x00000");
+        mint.setIpfs(ipfs);
+        mint.setType("Mint");
+        mint.setLogIndex(1);
+        dinoService.addNftMintInfo(genDinoId, UUID.randomUUID().toString(), mint);
 
         log.info("add nft info = {}", genDinoId.toString());
 

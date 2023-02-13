@@ -31,11 +31,14 @@
             <AppenderRef ref="console" />
             <AppenderRef ref="file" />
         </Logger>
-        <Logger name="org.hibernate.SQL" level="debug" additivity="false" >
+        <Logger name="org.hibernate.sql" level="error" additivity="false" >
             <AppenderRef ref="console" />
             <AppenderRef ref="file" />
         </Logger>
-
+        <Logger name="com.fruttidino.SQL_TRACE" level="error" additivity="false" >
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file" />
+        </Logger>
         <!-- rolling file에는 debug, console에는 info 분리하여 처리 가능하다. -->
         <Root level="info">
             <AppenderRef ref="console" />

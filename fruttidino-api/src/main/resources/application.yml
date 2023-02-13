@@ -103,6 +103,7 @@ cloud:
       queue:
         name: fdt-nft-event-testnet-dev.fifo	# AWS에서 생성한 Queue 이름
         url: https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-testnet-dev.fifo # 생성한
+
 ---
 ####################################
 # Stage Settings
@@ -178,7 +179,7 @@ spring:
         dialect: org.hibernate.dialect.CockroachDB201Dialect
         check_nullability : true
         format_sql : true
-    show-sql: false
+    show-sql: true
   redis:
     host: frutti-prod-redis.or9ryi.clustercfg.apse1.cache.amazonaws.com
     port: 6379
@@ -197,10 +198,6 @@ cloud:
       queue:
         name: fdt-nft-event-prod.fifo	# AWS에서 생성한 Queue 이름
         url: https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-prod.fifo # 생성한
-decorator:
-  datasource:
-    p6spy:
-      enable-logging: true
 ---
 ####################################
 # Common Settings

@@ -64,14 +64,18 @@ public class DinoNftQueueService {
 
             // merge user_dino
             Optional<UserDino> userDinoOptional = userDinoRepository.findById(dinoId);
-            UserDino userDino = new UserDino();
-            userDino.setGenId(dinoGen.getGenId());
-            userDino.setNftId(dinoGen.getNftId());
-            userDino.setOwner(mint.getTo());
             if (userDinoOptional.isPresent()) {
-                userDino.setUid(userDinoOptional.get().getUid());
+                userDinoOptional.get().setNftId(dinoGen.getNftId());
+                userDinoOptional.get().setOwner(mint.getTo());
+                log.info("[modifyNftInfo][userDino][success] : dinoId = {}, userId = {}", dinoId, userDinoOptional.get().getUid());
+            } else {
+                UserDino userDino = new UserDino();
+                userDino.setGenId(dinoGen.getGenId());
+                userDino.setNftId(dinoGen.getNftId());
+                userDino.setOwner(mint.getTo());
+                userDinoRepository.save(userDino);
+                log.info("[addNftInfo][userDino][success] : dinoId = {}, nftId = {}", dinoId, dinoGen.getNftId());
             }
-            userDinoRepository.save(userDino);
         } catch (Exception ex) {
             log.error("[addNftInfo][execption] : {}", ex.getMessage());
 
@@ -85,7 +89,7 @@ public class DinoNftQueueService {
 
     @Transactional
     public void addNftOwnerTransfer(int paramTokenId, String msgId, Transfer transfer) {
-        log.debug("[addUserTransfer] : {}", transfer.toString());
+        log.info("[addUserTransfer] : {}", transfer.toString());
         try {
             NftLog nftLog = new NftLog();
             nftLog.setMsgId(msgId);
@@ -101,21 +105,26 @@ public class DinoNftQueueService {
 
             Optional<DinoGen> dinoGenOptional = Optional.ofNullable(dinoGenRepository.findDinoGenByNftId(paramTokenId));
             if (!dinoGenOptional.isPresent()) {
-                log.info("[addNftInfo][error] : not exist, tokenId = {}", paramTokenId);
+                log.info("[addUserTransfer][error] : not exist, tokenId = {}", paramTokenId);
                 return;
             }
 
             DinoGen dinoGen = dinoGenOptional.get();
             Optional<UserDino> userDinoOptional = userDinoRepository.findById(dinoGen.getGenId());
-            UserDino userDino = new UserDino();
-            userDino.setGenId(dinoGen.getGenId());
-            userDino.setNftId(dinoGen.getNftId());
-            userDino.setOwner(transfer.getTo());
 
             if (userDinoOptional.isPresent()) {
-                userDino.setUid(userDinoOptional.get().getUid());
+                userDinoOptional.get().setNftId(dinoGen.getNftId());
+                userDinoOptional.get().setOwner(transfer.getTo());
+                log.info("[transfer][modifyNftInfo][userDino][success] : dinoId = {}, owner = {}", dinoGen.getGenId(), transfer.getTo());
+            } else {
+                UserDino userDino = new UserDino();
+                userDino.setGenId(dinoGen.getGenId());
+                userDino.setNftId(dinoGen.getNftId());
+                userDino.setOwner(transfer.getTo());
+                userDinoRepository.save(userDino);
+                log.info("[transfer][addNftInfo][userDino][success] : dinoId = {}, owner = {}", dinoGen.getGenId(), transfer.getTo());
             }
-            userDinoRepository.save(userDino);
+
             log.info("[addUserTransfer][success] : dinoId = {}", nftLog);
         }
         catch (Exception ex) {
