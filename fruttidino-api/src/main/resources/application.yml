@@ -37,10 +37,10 @@ spring:
         check_nullability : true
         format_sql : true
     #show-sql: true #query debugging
-  redis:
-    host: localhost
-    port: 6379
-    ttl: 10 #cache ttl
+#  redis:
+#    host: localhost
+#    port: 6379
+#    ttl: 10 #cache ttl
 cloud:
   aws:
     credentials:
@@ -84,10 +84,10 @@ spring:
         check_nullability : true
         format_sql : true
     show-sql: true
-  redis:
-    host: localhost
-    port: 6379
-    ttl: 10 #cache ttl
+#  redis:
+#    host: localhost
+#    port: 6379
+#    ttl: 10 #cache ttl
 cloud:
   aws:
     credentials:
@@ -132,10 +132,10 @@ spring:
         check_nullability : true
         format_sql : true
     show-sql: true
-  redis:
-    host: frutti-stage-redis.or9ryi.ng.0001.apse1.cache.amazonaws.com
-    port: 6379
-    ttl: 10 #cache ttl
+#  redis:
+#    host: frutti-stage-redis.or9ryi.ng.0001.apse1.cache.amazonaws.com
+#    port: 6379
+#    ttl: 10 #cache ttl
 cloud:
   aws:
     credentials:
@@ -180,10 +180,10 @@ spring:
         check_nullability : true
         format_sql : true
     show-sql: true
-  redis:
-    host: frutti-prod-redis.or9ryi.clustercfg.apse1.cache.amazonaws.com
-    port: 6379
-    ttl: 10080 #cache ttl, 10080 minutes(7days)
+#  redis:
+#    host: frutti-prod-redis.or9ryi.clustercfg.apse1.cache.amazonaws.com
+#    port: 6379
+#    ttl: 10080 #cache ttl, 10080 minutes(7days)
 cloud:
   aws:
     credentials:
@@ -228,10 +228,10 @@ spring:
   web:
     resources:
       add-mappings: false
-  cache:
-    type: redis
-    redis:
-      cache-null-values: true
+#  cache:
+#    type: redis
+#    redis:
+#      cache-null-values: true
 server:
   port: 10001
   output:

@@ -40,18 +40,6 @@ public class FruttiApiController {
 
     StringBuilder sb = new StringBuilder();
 
-
-    @GetMapping("/dinos")
-    public List<NftMeta> listAllDinoNftMeta() {
-        List<NftMeta> list = new ArrayList<>();
-
-        Iterable<NftMeta> iterable = dinoMetaRepository.findAllByDinoNftMetas();
-        for (NftMeta nftMeta : iterable) {
-            list.add(nftMeta);
-        }
-        return  list;
-    }
-
     @GetMapping("/dino/{tokenId}")
     public NftMetaJson DinoNftMeta(@PathVariable("tokenId") Integer tokenId) throws Exception {
         NftMetaJson nftMetaJsonData;

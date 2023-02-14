@@ -28,7 +28,8 @@ import java.time.Duration;
 @Configuration
 @EnableCaching
 public class RedisCacheConfig {
-
+/*
+캐싱 데이터와 DB 데이터의 불일치 문제로 근본적인 해결방법을 찾기 전까진 보류
     private final RedisProperties redisProperties;
     @Value("${spring.redis.ttl}")
     private long CACHE_TIME_TO_LIVE;
@@ -86,4 +87,6 @@ public class RedisCacheConfig {
 
         return RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(cf).cacheDefaults(redisCacheConfiguration).build();
     }
+
+ */
 }
