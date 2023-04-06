@@ -77,25 +77,25 @@ public interface DinoMetaRepository extends CrudRepository<NftMeta, Long> {
     List<NftMeta> findAllByDinoNftMetas();
 
     @Query(value = "select di.gen_id, di.attribute, di.role, di.talent, di.grade, di.name_string as dino_name, di.pure_part_count, di.nft_id, di.gen_seq, di.dino_type, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_origin, di.ipfs_cdn, di.nft_dsc, \n" +
-            "\t(select tag_title_string from game.limited_dino ld where ld.idx = di.tag_idx) as limited_tag,\n" +
-            " \t(select limited_name from game.dino_part dp where dp.head = di.head ) as limited_part_set,\n" +
-            "\t(select limited_name from game.dino_part dp where dp.head = di.head) as head_title,\n" +
-            "\t(select head_name_string from game.dino_part dp where dp.head = di.head ) as head_name,\n" +
-            "\t(select limited_name from game.dino_part dp where dp.eyes = di.eyes) as eyes_title,\n" +
-            "\t(select eyes_name_string from game.dino_part dp where dp.eyes = di.eyes ) as eyes_name,\n" +
-            "\t(select limited_name from game.dino_part dp where dp.mouth = di.mouth) as mouth_title,\n" +
-            "\t(select mouth_name_string from game.dino_part dp where dp.mouth = di.mouth ) as mouth_name,\n" +
-            "\t(select limited_name from game.dino_part dp where dp.tail = di.tail) as tail_title,\n" +
-            "\t(select tail_name_string from game.dino_part dp where dp.tail = di.tail ) as tail_name,\n" +
+            "\t(select distinct tag_title_string from game.limited_dino ld where ld.idx = di.tag_idx) as limited_tag,\n" +
+            " \t(select distinct limited_name from game.dino_part dp where dp.head = di.head ) as limited_part_set,\n" +
+            "\t(select distinct limited_name from game.dino_part dp where dp.head = di.head) as head_title,\n" +
+            "\t(select distinct head_name_string from game.dino_part dp where dp.head = di.head ) as head_name,\n" +
+            "\t(select distinct limited_name from game.dino_part dp where dp.eyes = di.eyes) as eyes_title,\n" +
+            "\t(select distinct eyes_name_string from game.dino_part dp where dp.eyes = di.eyes ) as eyes_name,\n" +
+            "\t(select distinct limited_name from game.dino_part dp where dp.mouth = di.mouth) as mouth_title,\n" +
+            "\t(select distinct mouth_name_string from game.dino_part dp where dp.mouth = di.mouth ) as mouth_name,\n" +
+            "\t(select distinct limited_name from game.dino_part dp where dp.tail = di.tail) as tail_title,\n" +
+            "\t(select distinct tail_name_string from game.dino_part dp where dp.tail = di.tail ) as tail_name,\n" +
             "\t(select limited_name from game.dino_part dp where dp.wing = di.wing limit 1) as wing_title,\n" +
             "\t(select wing_name_string from game.dino_part dp where dp.wing = di.wing limit 1) as wing_name,\n" +
-            "\t(select limited_name from game.dino_part dp where dp.back = di.back) as back_title,\n" +
-            "\t(select back_name_string from game.dino_part dp where dp.back = di.back ) as back_name,\n" +
+            "\t(select distinct limited_name from game.dino_part dp where dp.back = di.back) as back_title,\n" +
+            "\t(select distinct back_name_string from game.dino_part dp where dp.back = di.back ) as back_name,\n" +
             "\tdi.wing_slot\n" +
             "from (\n" +
             "\tselect * from game.dino_gen dg join game.dino_basic db on dg.dino_type = db.dino_type\n" +
             "\twhere dg.nft_id = :tokenId\n" +
-            ") di", nativeQuery = true)
+            ") di\n", nativeQuery = true)
     NftMeta findDinoNftMetaByTokenId(@Param("tokenId") Integer tokenId);
 
 }

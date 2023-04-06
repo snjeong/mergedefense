@@ -26,7 +26,7 @@ import java.time.Duration;
 
 @RequiredArgsConstructor
 @Configuration
-@EnableCaching
+//@EnableCaching
 public class RedisCacheConfig {
 /*
 캐싱 데이터와 DB 데이터의 불일치 문제로 근본적인 해결방법을 찾기 전까진 보류

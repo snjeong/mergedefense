@@ -58,6 +58,29 @@ public class DinoNftMetaService {
     //@Profile("prod")
     //@Cacheable(value = "NftMetaInfo", key = "#tokenId", cacheManager = "nftMetaCacheManager")
     public NftMetaJson getNftMetaInfo(Integer tokenId) {
+        /* TODO : 디버깅을 위한 네이티브쿼리
+        String value = "select di.gen_id, di.attribute, di.role, di.talent, di.grade, di.name_string as dino_name, di.pure_part_count, di.nft_id, di.gen_seq, di.dino_type, di.body, di.head, di.eyes, di.mouth, di.limited_part_count, di.ipfs_origin, di.ipfs_cdn, di.nft_dsc, \n" +
+                "\t(select distinct tag_title_string from game.limited_dino ld where ld.idx = di.tag_idx) as limited_tag,\n" +
+                " \t(select distinct limited_name from game.dino_part dp where dp.head = di.head ) as limited_part_set,\n" +
+                "\t(select distinct limited_name from game.dino_part dp where dp.head = di.head) as head_title,\n" +
+                "\t(select distinct head_name_string from game.dino_part dp where dp.head = di.head ) as head_name,\n" +
+                "\t(select distinct limited_name from game.dino_part dp where dp.eyes = di.eyes) as eyes_title,\n" +
+                "\t(select distinct eyes_name_string from game.dino_part dp where dp.eyes = di.eyes ) as eyes_name,\n" +
+                "\t(select distinct limited_name from game.dino_part dp where dp.mouth = di.mouth) as mouth_title,\n" +
+                "\t(select distinct mouth_name_string from game.dino_part dp where dp.mouth = di.mouth ) as mouth_name,\n" +
+                "\t(select distinct limited_name from game.dino_part dp where dp.tail = di.tail) as tail_title,\n" +
+                "\t(select distinct tail_name_string from game.dino_part dp where dp.tail = di.tail ) as tail_name,\n" +
+                "\t(select limited_name from game.dino_part dp where dp.wing = di.wing limit 1) as wing_title,\n" +
+                "\t(select wing_name_string from game.dino_part dp where dp.wing = di.wing limit 1) as wing_name,\n" +
+                "\t(select distinct limited_name from game.dino_part dp where dp.back = di.back) as back_title,\n" +
+                "\t(select distinct back_name_string from game.dino_part dp where dp.back = di.back ) as back_name,\n" +
+                "\tdi.wing_slot\n" +
+                "from (\n" +
+                "\tselect * from game.dino_gen dg join game.dino_basic db on dg.dino_type = db.dino_type\n" +
+                "\twhere dg.nft_id = :tokenId\n" +
+                ") di\n";
+        */
+
         nftMeta = dinoMetaRepository.findDinoNftMetaByTokenId(tokenId);
         if (nftMeta == null) {
             log.info(PlatformLogBuilder.create().setFuncNm("getNftMetaInfo").setFuncNm("findDinoNftMetaByTokenId").setSubStepNm("IN").setObj(tokenId).toString());
@@ -76,10 +99,10 @@ public class DinoNftMetaService {
         nftMetaJson.getAttributes().add(dinoAttrLimitedTag);
 
         NftMetaAttributes dinoAttrPartSet = new NftMetaAttributes();
-        dinoAttrPartSet.setTrait_type("Limited Parts Set");
+        dinoAttrPartSet.setTrait_type("Limited Parts");
         String limitedPartSet = "";
         if(nftMeta.getLimitedPartCount() > 0) {
-            limitedPartSet = String.format("%s(%d)", "Atuon", nftMeta.getLimitedPartCount());
+            limitedPartSet = String.format("%d", nftMeta.getLimitedPartCount());
         }
         else {
             limitedPartSet = nftMeta.getLimitedPartSet().equals("none") ? "-" :
@@ -95,7 +118,7 @@ public class DinoNftMetaService {
         nftMetaJson.getAttributes().add(dinoAttrGrade);
 
         NftMetaAttributes dinoAttrPureness = new NftMetaAttributes();
-        dinoAttrPureness.setTrait_type("Pureness");
+        dinoAttrPureness.setTrait_type("Purity");
         dinoAttrPureness.setValue(nftMeta.getPurePartCount() == 0 ? "-" : Integer.toString(nftMeta.getPurePartCount()));
         nftMetaJson.getAttributes().add(dinoAttrPureness);
 
